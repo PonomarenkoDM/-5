@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var form = Context.Request.Form;
+    string name = form["name"];
+    string lastName = form["lastName"];
+    string group = form["group"];
+    string [] assessments = form["assessments"].ToString().Split(",");
+   // string[] languages = form["languages"].ToString().Split(",");
+    string languages = form["languages"];
+    int i = 0;
+    int k = 0;
+    foreach (string assessment in assessments)
+    {
+        if (int.TryParse(assessment, out i))
+        {
+            k += i;
+        }
+    }
+
+    double averageAssessment = k / assessments.Length;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>О пользователе</title>
+</head>
+<body>
+    <p>Имя: @name
+    </p>
+    <p>Фамилия: @lastName
+    </p>
+    <p>Группа: @group
+    </p>
+    <p>
+        Средняя оценка: @averageAssessment
+    </p>
+    <p>Языки программирования: @languages
+    </p>
+</body>
+</html>
+
